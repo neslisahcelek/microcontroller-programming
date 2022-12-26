@@ -5,7 +5,7 @@ mov di, 0
 
 mainloop:
     mov dx, 2000h
-    add dx, di
+    add dx, di    ;2000,2001,2002
     
     mov bx, 0
     
@@ -14,10 +14,12 @@ print:
     mov cx, 5
     
     cmp dx, 2027h 
-    jle next      
-    MOV CX, 0FFH
-    WAIT:
-    LOOP WAIT
+    jle next 
+        
+MOV CX, 0FFH
+WAIT:
+LOOP WAIT  
+    
     mov dx, 2000h ;son bosluga geldiyse
     
 next:
@@ -29,8 +31,8 @@ next:
     cmp si, 5
     loopne next
     
-    add bx, 5
-    cmp bx, 40
+    add bx, 5         ;5,10,15
+    cmp bx, 40        ;8 alan tamamlaninca
     jl print  
     
     add di, 5
