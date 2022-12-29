@@ -49,5 +49,5 @@ loop GO
 exit:
 ret 
 MESSAGE DB 'Please enter a value between 14 and 26', 0
-N db 15  
+N db 16  
 array db N dup(0)
