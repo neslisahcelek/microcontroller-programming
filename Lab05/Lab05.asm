@@ -1,51 +1,46 @@
 org 100h
-#start=Emulation_Kit.exe#
 
-mov di, 0
+#start=Emulation_Kit.exe# 
 
-mainloop:
-    mov dx, 2000h
-    add dx, di    ;2000,2001,2002
-    
-    mov bx, 0
-    
-print:
-    mov si, 0
-    mov cx, 5
-    
-    cmp dx, 2027h 
-    jle next 
-        
-MOV CX, 0FFH
-WAIT:
-LOOP WAIT  
-    
-    mov dx, 2000h ;son bosluga geldiyse
-    
-next:
-    mov al, dots[bx][si]
-    out dx, al 
-    inc si
-    inc dx       
-    
-    cmp si, 5
-    loopne next
-    
-    add bx, 5         ;5,10,15
-    cmp bx, 40        ;8 alan tamamlaninca
-    jl print  
-    
-    add di, 5
-    
-loop mainloop
-    
-    
-    
+start:
+mov di, 0  
+mov si, 0
+mov bx, 0 
+
+dot:
+mov dx, 2000h  
+add dx, di 
+mov al, dots[bx][si]
+out dx, al
+
+inc si
+inc di
+
+cmp dx, 2027h
+je start 
+
+cmp si, 5
+je big 
+
+loop dot    
+
+big:
+add bx, 5 
+mov si, 0 
+jmp dot
 
 
 ret
 dots DB	01111111b, 00000100b, 00001000b, 00010000b, 01111111b  ; N
-	 DB	01111111b, 01001001b, 01001001b, 01001001b, 01000001b  ; E	 
+	 DB	01111111b, 01001001b, 01001001b, 01001001b, 01000001b  ; E	
+	 DB	00100110b, 01001001b, 01001001b, 01001001b, 00110010b  ; S
+	 DB	01111111b, 01000000b, 01000000b, 01000000b, 01000000b  ; L     
+	 DB	00000000b, 00000000b, 01111101b, 00000000b, 00000000b  ; I
+	 DB 00110110b, 01001001b, 01001001b, 01001001b, 00110110b  ; 8
+	 DB 00110110b, 01001001b, 01001001b, 01001001b, 00110110b  ; 8
+	 DB 00110110b, 01001001b, 01001001b, 01001001b, 00110110b  ; 8 
+	  
+	   
 	 DB	01000010b, 01001001b, 01001001b, 01001001b, 00110110b  ; B
 	 DB	00111110b, 01000001b, 01000001b, 01000001b, 00100010b  ; C
 	 DB	01111111b, 01000001b, 01000001b, 00100010b, 00011100b  ; D
